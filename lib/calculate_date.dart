@@ -1,11 +1,10 @@
 import 'dart:core';
 
 class EthiopianDate {
-  static var datetime = DateTime.now();
   static int year = 2000;
   static int month = 1;
   static int date = 0;
-  static String calculateDate() {
+  static String calculateDate(DateTime datetime) {
     if (DateTime.january <= datetime.month &&
         datetime.month >= DateTime.september) {
       if (datetime.month != DateTime.september) {
