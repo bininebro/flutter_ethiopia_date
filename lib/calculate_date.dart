@@ -190,7 +190,8 @@ class EthiopianDate {
         month = 12;
         date = datetime.day - 6;
       }
-    }
+    }print('$date $month $year');
+
     return '$date $month $year';
   }
 }

@@ -58,7 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             ElevatedButton(
-                onPressed: selectDate(context),
+                onPressed: (){selectDate(context);},
                 child: Text(selectedDate.toString())),
             ElevatedButton(
                 onPressed: () {
