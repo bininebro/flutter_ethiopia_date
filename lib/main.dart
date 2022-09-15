@@ -33,6 +33,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   DateTime selectedDate = DateTime.now();
+  String date = EthiopianDate.calculateDate(DateTime.now());
   Future<void> selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
         context: context,
@@ -42,13 +43,13 @@ class _MyHomePageState extends State<MyHomePage> {
     if (picked != null && picked != selectedDate) {
       setState(() {
         selectedDate = picked;
+        date = EthiopianDate.calculateDate(selectedDate);
       });
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    var date = EthiopianDate.calculateDate(DateTime.now());
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -58,12 +59,8 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             ElevatedButton(
-                onPressed: (){selectDate(context);},
-                child: Text(selectedDate.toString())),
-            ElevatedButton(
                 onPressed: () {
-                  setState(
-                      () => {date = EthiopianDate.calculateDate(selectedDate)});
+                  selectDate(context);
                 },
                 child: Text(selectedDate.toString())),
             Text(

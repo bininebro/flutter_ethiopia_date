@@ -5,10 +5,12 @@ class EthiopianDate {
   static int month = 1;
   static int date = 0;
   static String calculateDate(DateTime datetime) {
-    if (DateTime.january <= datetime.month &&
-        datetime.month >= DateTime.september) {
+    if (DateTime.january >= datetime.month ||
+        datetime.month <= DateTime.september) {
       if (datetime.month != DateTime.september) {
         year = datetime.year - 8;
+
+        print(datetime.month);
       } else if (datetime.month == DateTime.september &&
           datetime.year % 4 != 0 &&
           datetime.day < 11) {
@@ -19,95 +21,16 @@ class EthiopianDate {
         year = datetime.year - 8;
       } else {
         year = datetime.year - 7;
+        print("haha");
       }
     } else {
       year = datetime.year - 7;
+      print("hee");
     }
+    var tempyear = year - 1;
 
-    if (DateTime.september == datetime.month) {
-      if (year % 4 == 0) {
-        if (datetime.day < 6) {
-          month = 12;
-          date = datetime.day + 31 - 6;
-        } else {
-          if (datetime.day < 12) {
-            month = 13;
-            date = datetime.day - 5;
-          } else {
-            month = 1;
-            date = datetime.day - 10;
-          }
-        }
-      } else {
-        if (datetime.day < 6) {
-          month = 12;
-          date = datetime.day + 31 - 6;
-        } else {
-          if (datetime.day < 11) {
-            month = 13;
-            date = datetime.day - 5;
-          } else {
-            month = 1;
-            date = datetime.day - 10;
-          }
-        }
-      }
-    } else if (DateTime.october == datetime.month) {
-      if (year % 4 == 0) {
-        if (datetime.day < 12) {
-          month = 1;
-          date = datetime.day + 30 - 11;
-        } else {
-          month = 2;
-          date = datetime.day - 11;
-        }
-      } else {
-        if (datetime.day < 11) {
-          month = 1;
-          date = datetime.day + 30 - 10;
-        } else {
-          month = 2;
-          date = datetime.day - 10;
-        }
-      }
-    } else if (DateTime.november == datetime.month) {
-      if (year % 4 == 0) {
-        if (datetime.day < 11) {
-          month = 2;
-          date = datetime.day + 31 - 11;
-        } else {
-          month = 3;
-          date = datetime.day - 10;
-        }
-      } else {
-        if (datetime.day < 10) {
-          month = 2;
-          date = datetime.day + 30 - 10;
-        } else {
-          month = 3;
-          date = datetime.day - 9;
-        }
-      }
-    } else if (DateTime.december == datetime.month) {
-      if (year % 4 == 0) {
-        if (datetime.day < 11) {
-          month = 3;
-          date = datetime.day + 30 - 10;
-        } else {
-          month = 4;
-          date = datetime.day - 10;
-        }
-      } else {
-        if (datetime.day < 10) {
-          month = 3;
-          date = datetime.day + 30 - 9;
-        } else {
-          month = 4;
-          date = datetime.day - 9;
-        }
-      }
-    } else if (DateTime.january == datetime.month) {
-      if (year % 4 == 0) {
+    if (DateTime.january == datetime.month) {
+      if (tempyear % 4 == 0) {
         if (datetime.day < 10) {
           month = 4;
           date = datetime.day + 31 - 10;
@@ -125,7 +48,7 @@ class EthiopianDate {
         }
       }
     } else if (DateTime.february == datetime.month) {
-      if (year % 4 == 0) {
+      if (tempyear % 4 == 0) {
         if (datetime.day < 10) {
           month = 5;
           date = datetime.day + 31 - 9;
@@ -190,7 +113,89 @@ class EthiopianDate {
         month = 12;
         date = datetime.day - 6;
       }
-    }print('$date $month $year');
+    } else if (DateTime.september == datetime.month) {
+      if (tempyear % 4 == 0) {
+        if (datetime.day < 6) {
+          month = 12;
+          date = datetime.day + 31 - 6;
+        } else {
+          if (datetime.day < 12) {
+            month = 13;
+            date = datetime.day - 5;
+          } else {
+            month = 1;
+            date = datetime.day - 10;
+          }
+        }
+      } else {
+        if (datetime.day < 6) {
+          month = 12;
+          date = datetime.day + 31 - 6;
+        } else {
+          if (datetime.day < 11) {
+            month = 13;
+            date = datetime.day - 5;
+          } else {
+            month = 1;
+            date = datetime.day - 10;
+          }
+        }
+      }
+    } else if (DateTime.october == datetime.month) {
+      if (tempyear % 4 == 0) {
+        if (datetime.day < 12) {
+          month = 1;
+          date = datetime.day + 30 - 11;
+        } else {
+          month = 2;
+          date = datetime.day - 11;
+        }
+      } else {
+        if (datetime.day < 11) {
+          month = 1;
+          date = datetime.day + 30 - 10;
+        } else {
+          month = 2;
+          date = datetime.day - 10;
+        }
+      }
+    } else if (DateTime.november == datetime.month) {
+      if (tempyear % 4 == 0) {
+        if (datetime.day < 11) {
+          month = 2;
+          date = datetime.day + 31 - 11;
+        } else {
+          month = 3;
+          date = datetime.day - 10;
+        }
+      } else {
+        if (datetime.day < 10) {
+          month = 2;
+          date = datetime.day + 30 - 10;
+        } else {
+          month = 3;
+          date = datetime.day - 9;
+        }
+      }
+    } else if (DateTime.december == datetime.month) {
+      if (tempyear % 4 == 0) {
+        if (datetime.day < 11) {
+          month = 3;
+          date = datetime.day + 30 - 10;
+        } else {
+          month = 4;
+          date = datetime.day - 10;
+        }
+      } else {
+        if (datetime.day < 10) {
+          month = 3;
+          date = datetime.day + 30 - 9;
+        } else {
+          month = 4;
+          date = datetime.day - 9;
+        }
+      }
+    }
 
     return '$date $month $year';
   }
