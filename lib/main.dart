@@ -63,8 +63,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   selectDate(context);
                 },
                 child: Text(selectedDate.toString())),
+            const SizedBox(height: 29),
             Text(
               'Today date is : $date',
+              style: TextStyle(fontSize: 20),
             ),
           ],
         ),
