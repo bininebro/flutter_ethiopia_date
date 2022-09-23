@@ -9,23 +9,19 @@ class EthiopianDate {
         datetime.month <= DateTime.september) {
       if (datetime.month != DateTime.september) {
         year = datetime.year - 8;
-
-        print(datetime.month);
       } else if (datetime.month == DateTime.september &&
-          datetime.year % 4 != 0 &&
+          (datetime.year % 4 + 1) != 0 &&
           datetime.day < 11) {
         year = datetime.year - 8;
       } else if (datetime.month == DateTime.september &&
-          datetime.year % 4 == 0 &&
+          (datetime.year + 1) % 4 == 0 &&
           datetime.day < 12) {
         year = datetime.year - 8;
       } else {
         year = datetime.year - 7;
-        print("haha");
       }
     } else {
       year = datetime.year - 7;
-      print("hee");
     }
     var tempyear = year - 1;
 
