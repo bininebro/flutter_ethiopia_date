@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'calculate_date.dart';
+import 'generate_calander.dart';
+import 'package:intl/intl.dart';
 
 void main() {
   runApp(const MyApp());
@@ -62,12 +64,35 @@ class _MyHomePageState extends State<MyHomePage> {
                 onPressed: () {
                   selectDate(context);
                 },
-                child: Text(selectedDate.toString())),
+                child: Text(DateFormat.yMd().format(selectedDate))),
             const SizedBox(height: 29),
             Text(
               'Today date is : $date',
               style: TextStyle(fontSize: 20),
             ),
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Container(
+                height: MediaQuery.of(context).size.height * .6,
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Icon(Icons.chevron_left),
+                        Text(
+                          'መስከረም 2015',
+                          style: TextStyle(fontSize: 20),
+                        ),
+                        const Icon(Icons.chevron_right),
+                      ],
+                    ),
+                    SizedBox(height: 10),
+                    const GenerateCalender()
+                  ],
+                ),
+              ),
+            )
           ],
         ),
       ),
