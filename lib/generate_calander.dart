@@ -10,7 +10,7 @@ class GenerateCalender extends StatefulWidget {
 class _GenerateCalenderState extends State<GenerateCalender> {
   @override
   Widget build(BuildContext context) {
-    bool isSelected = true;
+    bool isSelected = false;
     bool isBetween = true;
     bool isFirst = false;
     return Expanded(
@@ -25,7 +25,7 @@ class _GenerateCalenderState extends State<GenerateCalender> {
                 Padding(
                   padding: const EdgeInsets.only(bottom: 10.0),
                   child: Container(
-                    width: 51,
+                    width: 50,
                     decoration: BoxDecoration(
                         color: isSelected
                             ? Colors.green
