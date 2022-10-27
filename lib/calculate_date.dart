@@ -1,10 +1,19 @@
 import 'dart:core';
+import 'dart:html';
 
-class EthiopianDate {
+import 'package:get/get.dart';
+
+import 'mvc/model/ethiopian_date.dart';
+import 'mvc/model/split_characters.dart';
+
+class EthiopianDateConverter {
   static int year = 2000;
   static int month = 1;
   static int date = 0;
-  static String calculateDate(DateTime datetime) {
+  static int weekDays = 1;
+
+  static EthiopianDate calculateDate(DateTime datetime) {
+    weekDays = datetime.weekday;
     if (DateTime.january >= datetime.month ||
         datetime.month <= DateTime.september) {
       if (datetime.month != DateTime.september) {
@@ -192,7 +201,200 @@ class EthiopianDate {
         }
       }
     }
+    EthiopianDate ethiopianDate =
+        EthiopianDate(date, month, year, '$date $month $year', weekDays);
+    return ethiopianDate;
+  }
 
-    return '$date $month $year';
+  static EthiopianDate addMonths() {
+    EthiopianDate ethiopianDate =
+        EthiopianDate(date, month, year, '$date $month $year', weekDays);
+    return ethiopianDate;
+  }
+
+  static EthiopianDate addDays() {
+    EthiopianDate ethiopianDate =
+        EthiopianDate(date, month, year, '$date $month $year', weekDays);
+    return ethiopianDate;
+  }
+
+  static EthiopianDate addYears() {
+    EthiopianDate ethiopianDate =
+        EthiopianDate(date, month, year, '$date $month $year', weekDays);
+    return ethiopianDate;
+  }
+
+  static SplitCharacters getCarcters(String text) {
+    final characters = [' ', '  ', '-', '/', '_', ','];
+    for (int i = 0; i < characters.length; i++) {
+      var spliced = text.split(characters[i]);
+      if (spliced.length > 1) {
+        return SplitCharacters(characters[i], spliced, true);
+      }
+    }
+    return SplitCharacters('', [text], true);
+  }
+
+  static String toStringFormat(String? format) {
+    String stringDate = '$date $month $year';
+
+    var splited = getCarcters(format ?? '');
+
+    if (format != null || splited.isSuccess) {
+      String tempDate = '';
+      for (int i = 0; i < splited.splitted.length; i++) {
+        var currentString;
+        switch (format) {
+          case "YYYY":
+            {
+              tempDate = '$year';
+            }
+            break;
+          case "M":
+            {
+              tempDate = '$month';
+            }
+            break;
+          case "MMM":
+            {
+              tempDate = ConvertMonthShort(month);
+            }
+            break;
+          case "MM":
+            {
+              tempDate = ConvertMonth(month);
+            }
+            break;
+          case "D":
+            {
+              tempDate = '$date';
+            }
+            break;
+          case "E":
+            {
+              tempDate = ConvertDateShort(weekDays);
+            }
+            break;
+          case "EEEE":
+            {
+              tempDate = ConvertDate(weekDays);
+            }
+            break;
+        }
+        if (i < splited.splitted.length - 1) {
+          tempDate += splited.characters + currentString;
+        }
+      }
+      stringDate = tempDate;
+    }
+    return stringDate;
+  }
+
+  static String ConvertDate(int weekdays) {
+    switch (month) {
+      case 1:
+        return 'ሰኞ';
+      case 2:
+        return 'ማክሰኞ';
+      case 3:
+        return 'ሮብ';
+      case 4:
+        return 'ኀሙስ';
+      case 5:
+        return 'አርብ';
+      case 6:
+        return 'ቅዳሜ';
+      case 7:
+        return 'እሑድ';
+      default:
+        return 'ሰኞ';
+    }
+  }
+
+  static String ConvertDateShort(int weekdays) {
+    switch (month) {
+      case 1:
+        return 'ሰ';
+      case 2:
+        return 'ማ';
+      case 3:
+        return 'ሮ';
+      case 4:
+        return 'ኀሙ';
+      case 5:
+        return 'አር';
+      case 6:
+        return 'ቅ';
+      case 7:
+        return 'እ';
+      default:
+        return 'ሰ';
+    }
+  }
+
+  static String ConvertMonthShort(int month) {
+    switch (month) {
+      case 1:
+        return 'መስ';
+      case 2:
+        return 'ጥ';
+      case 3:
+        return 'ሕ';
+      case 4:
+        return 'ታሕ';
+      case 5:
+        return 'ጥር';
+      case 6:
+        return 'የካ';
+      case 7:
+        return 'መጋ';
+      case 8:
+        return 'ሚያ';
+      case 9:
+        return 'ግን';
+      case 10:
+        return 'ሰኔ';
+      case 11:
+        return 'ሐም';
+      case 12:
+        return 'ነ';
+      case 13:
+        return 'ጳጉ';
+      default:
+        return 'መስ';
+    }
+  }
+
+  static String ConvertMonth(int month) {
+    switch (month) {
+      case 1:
+        return 'መስከረም';
+      case 2:
+        return 'ጥቅምት';
+      case 3:
+        return 'ሕዳር';
+      case 4:
+        return 'ታሕሣስ';
+      case 5:
+        return 'ጥር';
+      case 6:
+        return 'የካቲት';
+      case 7:
+        return 'መጋቢት';
+      case 8:
+        return 'ሚያዚያ';
+      case 9:
+        return 'ግንቦት';
+      case 10:
+        return 'ሰኔ';
+      case 11:
+        return 'ሐምሌ';
+      case 12:
+        return 'ነሐሴ	';
+      case 13:
+        return 'ጳጉሜ';
+      default:
+        return 'መስከረም';
+    }
   }
 }

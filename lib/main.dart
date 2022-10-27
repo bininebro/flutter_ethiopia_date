@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_ethiopian_date_converter/util/get_calander.dart';
 
 import 'calculate_date.dart';
 import 'generate_calander.dart';
 import 'package:intl/intl.dart';
+
+import 'mvc/model/ethiopian_date.dart';
 
 void main() {
   runApp(const MyApp());
@@ -35,7 +38,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   DateTime selectedDate = DateTime.now();
-  String date = EthiopianDate.calculateDate(DateTime.now());
+  EthiopianDate date = EthiopianDateConverter.calculateDate(DateTime.now());
   Future<void> selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
         context: context,
@@ -45,7 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
     if (picked != null && picked != selectedDate) {
       setState(() {
         selectedDate = picked;
-        date = EthiopianDate.calculateDate(selectedDate);
+        date = EthiopianDateConverter.calculateDate(selectedDate);
       });
     }
   }
@@ -67,12 +70,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Text(DateFormat.yMd().format(selectedDate))),
             const SizedBox(height: 29),
             Text(
-              'Today date is : $date',
-              style: TextStyle(fontSize: 20),
+              'Today date is : ${date.date}',
+              style: const TextStyle(fontSize: 20),
             ),
             Padding(
               padding: const EdgeInsets.all(15.0),
-              child: Container(
+              child: SizedBox(
                 height: MediaQuery.of(context).size.height * .6,
                 child: Column(
                   children: [
@@ -81,14 +84,14 @@ class _MyHomePageState extends State<MyHomePage> {
                       children: [
                         const Icon(Icons.chevron_left),
                         Text(
-                          'መስከረም 2015',
-                          style: TextStyle(fontSize: 20),
+                          '${date.month} ${date.year}',
+                          style: const TextStyle(fontSize: 20),
                         ),
                         const Icon(Icons.chevron_right),
                       ],
                     ),
-                    SizedBox(height: 10),
-                    const GenerateCalender()
+                    const SizedBox(height: 10),
+                    const GenerateCalender(GetCalender.generateCalender(date))
                   ],
                 ),
               ),
