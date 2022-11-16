@@ -1,7 +1,4 @@
 import 'dart:core';
-import 'dart:html';
-
-import 'package:get/get.dart';
 
 import 'mvc/model/ethiopian_date.dart';
 import 'mvc/model/split_characters.dart';

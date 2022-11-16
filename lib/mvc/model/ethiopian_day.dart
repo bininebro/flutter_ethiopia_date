@@ -10,3 +10,12 @@ class EthiopianDay {
   EthiopianDay(this.isSelected, this.isFirst, this.isBetween, this.day,
       this.month, this.enDay, this.enMonth);
 }
+
+class EthiopianMonth{
+  final List<EthiopianDay> dates;
+  final int lastMonthDates;
+  final int startDay;
+
+
+  EthiopianMonth(this.dates, this.lastMonthDates, this.startDay);
+}

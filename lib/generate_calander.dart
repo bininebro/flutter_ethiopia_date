@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
+import 'mvc/model/ethiopian_day.dart';
+
 class GenerateCalender extends StatefulWidget {
-  const GenerateCalender({Key? key}) : super(key: key);
+  final  EthiopianMonth ethiopianDate;
+  const GenerateCalender({Key? key, required this.ethiopianDate}) : super(key: key);
 
   @override
   State<GenerateCalender> createState() => _GenerateCalenderState();
@@ -13,10 +16,10 @@ class _GenerateCalenderState extends State<GenerateCalender> {
     bool isSelected = false;
     bool isBetween = true;
     bool isFirst = false;
-
+    int count =(widget.ethiopianDate.startDay + widget.ethiopianDate.dates.length/7).ceil();
     return Expanded(
       child: ListView.builder(
-        itemCount: 5,
+        itemCount: count,
         itemBuilder: (BuildContext context, int index) {
           int value = index * 7;
           return Row(

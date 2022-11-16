@@ -91,7 +91,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       ],
                     ),
                     const SizedBox(height: 10),
-                    const GenerateCalender(GetCalender.generateCalender(date))
+                    GenerateCalender(ethiopianDate: GetCalender.generateCalender(date))
                   ],
                 ),
               ),
