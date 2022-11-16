@@ -18,10 +18,26 @@ class GetCalender {
     if (date.month == 1) {
       getDay(13, date.year);
     }
-    for(int i=1;i<=day;i++){
-      Months.add(EthiopianDay(false,false,false,1.toString(),date.month.toString(),"",""));
+    int lastMonthDates=getPrevousMonthDay(date.month, date.year);
+    final int startDay;
+
+    for(int i=getTheFirstDayOftheMonth;i>0;i--){
+      String lstMonth = (date.month -1).toString();
+      if (date.month == 1) {
+        lstMonth = 13.toString();
+      }
+      Months.add(EthiopianDay(false,false,false,(lastMonthDates -i).toString(),lstMonth,"",""));
     }
-    EthiopianMonth ethiopianMonths = EthiopianMonth(Months,getPrevousMonthDay(date.month, date.year),getTheFirstDayOftheMonth);
+    for(int i=1;i<=day;i++){
+      Months.add(EthiopianDay(false,false,false,i.toString(),date.month.toString(),"",""));
+    }
+    int nextmonth =Months.length % 7;
+    if(nextmonth>0){
+      for(int i=1;i<nextmonth-1;i++){
+        Months.add(EthiopianDay(false,false,false,i.toString(),date.month.toString(),"",""));
+      }
+    }
+    EthiopianMonth ethiopianMonths = EthiopianMonth(Months);
     return ethiopianMonths;
   }
 

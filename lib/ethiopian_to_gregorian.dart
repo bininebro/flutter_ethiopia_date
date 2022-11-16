@@ -51,22 +51,22 @@ class EthiopianToGregorian {
 
      if (EthiopianDate.meskerem >= datetime.month &&
          datetime.month <= EthiopianDate.hidar) {
-       year += datetime.year + 7;
+       year = datetime.year + 7;
      }
      else {
        if (EthiopianDate.tahsas >= datetime.month) {
          if (datetime.day <= 20) {
-           year += datetime.year + 7;
+           year = datetime.year + 7;
          }
          else if (datetime.day <= 21 && isLeapYear) {
-           year += datetime.year + 7;
+           year = datetime.year + 7;
          }
          else {
-           year += datetime.year + 6;
+           year = datetime.year + 6;
          }
        }
        else {
-         year += datetime.year + 6;
+         year = datetime.year + 6;
        }
      }
 

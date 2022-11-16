@@ -13,9 +13,8 @@ class EthiopianDay {
 
 class EthiopianMonth{
   final List<EthiopianDay> dates;
-  final int lastMonthDates;
-  final int startDay;
 
 
-  EthiopianMonth(this.dates, this.lastMonthDates, this.startDay);
+
+  EthiopianMonth(this.dates);
 }

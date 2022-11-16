@@ -13,10 +13,8 @@ class GenerateCalender extends StatefulWidget {
 class _GenerateCalenderState extends State<GenerateCalender> {
   @override
   Widget build(BuildContext context) {
-    bool isSelected = false;
-    bool isBetween = true;
-    bool isFirst = false;
-    int count =(widget.ethiopianDate.startDay + widget.ethiopianDate.dates.length/7).ceil();
+ 
+    int count =( widget.ethiopianDate.dates.length/7).ceil();
     return Expanded(
       child: ListView.builder(
         itemCount: count,
@@ -31,13 +29,13 @@ class _GenerateCalenderState extends State<GenerateCalender> {
                   child: Container(
                     width: 50,
                     decoration: BoxDecoration(
-                        color: isSelected
+                        color: widget.ethiopianDate.dates[i].isSelected
                             ? Colors.green
-                            : isBetween
+                            : widget.ethiopianDate.dates[i].isBetween
                                 ? Colors.grey
                                 : Colors.white,
-                        borderRadius: isSelected
-                            ? isFirst
+                        borderRadius: widget.ethiopianDate.dates[i].isSelected
+                            ? widget.ethiopianDate.dates[i].isFirst
                                 ? const BorderRadius.only(
                                     topRight: Radius.circular(20),
                                     bottomRight: Radius.circular(20))
@@ -48,7 +46,7 @@ class _GenerateCalenderState extends State<GenerateCalender> {
                     height: 35,
                     child: Center(
                       child: Text(
-                        (i).toString(),
+                        widget.ethiopianDate.dates[i].day.toString(),
                         textAlign: TextAlign.center,
                       ),
                     ),
