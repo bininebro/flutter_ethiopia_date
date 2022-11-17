@@ -70,7 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Text(DateFormat.yMd().format(selectedDate))),
             const SizedBox(height: 29),
             Text(
-              'Today date is : ${date.date}',
+              'The date is : ${date.date}',
               style: const TextStyle(fontSize: 20),
             ),
             Padding(

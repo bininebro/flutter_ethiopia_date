@@ -70,7 +70,7 @@ class EthiopianToGregorian {
        }
      }
 
-
+     isLeapYear = (year + 1) % 4 == 0;
      if (EthiopianDate.meskerem == datetime.month) {
        tempMonth = 9;
        if (isLeapYear) {

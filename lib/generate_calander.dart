@@ -13,13 +13,12 @@ class GenerateCalender extends StatefulWidget {
 class _GenerateCalenderState extends State<GenerateCalender> {
   @override
   Widget build(BuildContext context) {
- 
+
     int count =( widget.ethiopianDate.dates.length/7).ceil();
     return Expanded(
       child: ListView.builder(
         itemCount: count,
         itemBuilder: (BuildContext context, int index) {
-          int value = index * 7;
           return Row(
             //    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -39,9 +38,10 @@ class _GenerateCalenderState extends State<GenerateCalender> {
                                 ? const BorderRadius.only(
                                     topRight: Radius.circular(20),
                                     bottomRight: Radius.circular(20))
-                                : const BorderRadius.only(
-                                    topLeft: Radius.circular(20),
-                                    bottomLeft: Radius.circular(20))
+                                :BorderRadius.circular(20)
+                        // const BorderRadius.only(
+                                 //   topLeft: Radius.circular(20),
+                                 //   bottomLeft: Radius.circular(20))
                             : BorderRadius.circular(1)),
                     height: 35,
                     child: Center(

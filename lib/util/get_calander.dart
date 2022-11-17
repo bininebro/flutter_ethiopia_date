@@ -5,8 +5,7 @@ import '../mvc/model/ethiopian_day.dart';
 
 class GetCalender {
   static EthiopianMonth generateCalender(EthiopianDate date) {
-
-    List<EthiopianDay> Months=[];
+    List<EthiopianDay> Months = [];
     int day = getDay(date.month, date.year);
 
     var getTheFirstDayOftheMonth = getTheFirstDayOfTheMonth(
@@ -18,25 +17,62 @@ class GetCalender {
     if (date.month == 1) {
       getDay(13, date.year);
     }
-    int lastMonthDates=getPrevousMonthDay(date.month, date.year);
-    final int startDay;
+    int lastMonthDates = getPrevousMonthDay(date.month, date.year);
 
-    for(int i=getTheFirstDayOftheMonth;i>0;i--){
-      String lstMonth = (date.month -1).toString();
+    for (int i = getTheFirstDayOftheMonth - 1; i > 0; i--) {
+      String lstMonth = (date.month - 1).toString();
+      String lstMonthDates = (lastMonthDates - (i - 1)).toString();
       if (date.month == 1) {
         lstMonth = 13.toString();
       }
-      Months.add(EthiopianDay(false,false,false,(lastMonthDates -i).toString(),lstMonth,"",""));
+
+      Months.add(EthiopianDay(
+          false,
+          false,
+          false,
+          lstMonthDates,
+          lstMonth,
+          "",
+          ""));
     }
-    for(int i=1;i<=day;i++){
-      Months.add(EthiopianDay(false,false,false,i.toString(),date.month.toString(),"",""));
-    }
-    int nextmonth =Months.length % 7;
-    if(nextmonth>0){
-      for(int i=1;i<nextmonth-1;i++){
-        Months.add(EthiopianDay(false,false,false,i.toString(),date.month.toString(),"",""));
+
+    for (int i = 1; i <= day; i++) {
+      if (date.day == i) {
+        Months.add(EthiopianDay(
+            true,
+            false,
+            false,
+            i.toString(),
+            date.month.toString(),
+            "",
+            ""));
+      }
+      else {
+        Months.add(EthiopianDay(
+            false,
+            false,
+            false,
+            i.toString(),
+            date.month.toString(),
+            "",
+            ""));
       }
     }
+
+    int nextMonth = 7 - (Months.length % 7);
+    if (nextMonth > 0) {
+      for (int i = 1; i <= nextMonth; i++) {
+        Months.add(EthiopianDay(
+            false,
+            false,
+            false,
+            i.toString(),
+            date.month.toString(),
+            "",
+            ""));
+      }
+    }
+
     EthiopianMonth ethiopianMonths = EthiopianMonth(Months);
     return ethiopianMonths;
   }
@@ -52,12 +88,14 @@ class GetCalender {
     }
     return day;
   }
+
   static int getPrevousMonthDay(month, year) {
     if (month == 1) {
       month = 13;
     }
     return getDay(month - 1, year);
   }
+
   static int getTheFirstDayOfTheMonth(int month, int year) {
     var ethiopianDate = EthiopianDate(1, month, year, '', 0);
     var gregorianDate = EthiopianToGregorian.calculateDate(ethiopianDate);
