@@ -47,7 +47,7 @@ class EthiopianToGregorian {
      int addDays = 1;
      int tempMonth = 1;
 
-     bool isLeapYear = (datetime.year + 1) % 4 == 0;
+     bool isLeapYear = (datetime.year) % 4 == 0;
 
      if (EthiopianDate.meskerem >= datetime.month &&
          datetime.month <= EthiopianDate.hidar) {
@@ -62,15 +62,15 @@ class EthiopianToGregorian {
            year = datetime.year + 7;
          }
          else {
-           year = datetime.year + 6;
+           year = datetime.year + 8;
          }
        }
        else {
-         year = datetime.year + 6;
+         year = datetime.year + 8;
        }
      }
 
-     isLeapYear = (year + 1) % 4 == 0;
+     //isLeapYear = (year +1) % 4 == 0;
      if (EthiopianDate.meskerem == datetime.month) {
        tempMonth = 9;
        if (isLeapYear) {
@@ -131,7 +131,7 @@ class EthiopianToGregorian {
      }
      else if (EthiopianDate.sene == datetime.month) {
        tempMonth = 6;
-       addDays = 8;
+       addDays = 7;
      }
      else if (EthiopianDate.hamle == datetime.month) {
        tempMonth = 7;
@@ -142,8 +142,8 @@ class EthiopianToGregorian {
        addDays = 6;
      }
      else if (EthiopianDate.pagume == datetime.month) {
-       tempMonth = 8;
-       addDays = 6;
+       tempMonth = 9;
+       addDays = 5;
      }
      calculateDayAndMonth(tempMonth,datetime.day,addDays,isLeapYear);
      DateTime gregorianDateTime =DateTime(year, month,date);

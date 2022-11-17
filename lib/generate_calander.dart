@@ -48,6 +48,7 @@ class _GenerateCalenderState extends State<GenerateCalender> {
                       child: Text(
                         widget.ethiopianDate.dates[i].day.toString(),
                         textAlign: TextAlign.center,
+                        style: TextStyle(color:widget.ethiopianDate.dates[i].isOtherMonth? Colors.grey:Colors.black),
                       ),
                     ),
                   ),

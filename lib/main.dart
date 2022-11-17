@@ -39,6 +39,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   DateTime selectedDate = DateTime.now();
   EthiopianDate date = EthiopianDateConverter.calculateDate(DateTime.now());
+
   Future<void> selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
         context: context,
@@ -76,22 +77,68 @@ class _MyHomePageState extends State<MyHomePage> {
             Padding(
               padding: const EdgeInsets.all(15.0),
               child: SizedBox(
-                height: MediaQuery.of(context).size.height * .6,
+                height: MediaQuery
+                    .of(context)
+                    .size
+                    .height * .6,
                 child: Column(
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Icon(Icons.chevron_left),
+                        MaterialButton(onPressed: () {
+                          int month = date.month;
+                          int year = date.year;
+                          if (date.month == 1) {
+                            month = 13;
+                            year -= 1;
+                          } else {
+                            month -= 1;
+                          }
+                          setState(() {
+                            date = EthiopianDate(1, month, year, '', 0);
+                          });
+                        }, child: const Icon(Icons.chevron_left)),
                         Text(
                           '${date.month} ${date.year}',
                           style: const TextStyle(fontSize: 20),
                         ),
-                        const Icon(Icons.chevron_right),
+                        MaterialButton(onPressed: () {
+                          int month = date.month;
+                          int year = date.year;
+                          if (date.month == 13) {
+                            month = 1;
+                            year += 1;
+                          } else {
+                            month += 1;
+                          }
+                          setState(() {
+                            date = EthiopianDate(1, month, year, '', 0);
+                          });
+                        }, child: const Icon(Icons.chevron_right)),
                       ],
                     ),
                     const SizedBox(height: 10),
-                    GenerateCalender(ethiopianDate: GetCalender.generateCalender(date))
+                    Row(
+                      children: [
+                        Container(
+                          width: 50,
+
+                          height: 35,
+                          child: Center(
+                            child: Text(
+                             '',
+                              textAlign: TextAlign.center,
+
+                            ),
+
+                          ),
+                        )
+                      ],
+                    ),
+                    const SizedBox(height: 10),
+                    GenerateCalender(
+                        ethiopianDate: GetCalender.generateCalender(date))
                   ],
                 ),
               ),

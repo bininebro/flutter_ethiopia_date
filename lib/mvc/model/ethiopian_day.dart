@@ -6,9 +6,9 @@ class EthiopianDay {
   final String month;
   final String enDay;
   final String enMonth;
-
+  final bool isOtherMonth;
   EthiopianDay(this.isSelected, this.isFirst, this.isBetween, this.day,
-      this.month, this.enDay, this.enMonth);
+      this.month, this.enDay, this.enMonth,this.isOtherMonth);
 }
 
 class EthiopianMonth{
