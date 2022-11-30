@@ -6,6 +6,7 @@ import 'generate_calander.dart';
 import 'package:intl/intl.dart';
 
 import 'mvc/model/ethiopian_date.dart';
+import 'widgets/day_display.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,7 +23,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+
+     supportedLocales: const [
+      Locale('en', 'US'),
+    Locale('am','ET'),
+    ],
+      home: const MyHomePage(title: 'የኢትዮጲያ ቀን መቁጠሪያ'),
     );
   }
 }
@@ -38,6 +44,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   DateTime selectedDate = DateTime.now();
+  bool isVisible =true;
   EthiopianDate date = EthiopianDateConverter.calculateDate(DateTime.now());
 
   Future<void> selectDate(BuildContext context) async {
@@ -49,6 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
     if (picked != null && picked != selectedDate) {
       setState(() {
         selectedDate = picked;
+        isVisible =true;
         date = EthiopianDateConverter.calculateDate(selectedDate);
       });
     }
@@ -70,10 +78,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 },
                 child: Text(DateFormat.yMd().format(selectedDate))),
             const SizedBox(height: 29),
-            Text(
-              'The date is : ${date.date}',
+          Visibility(visible:isVisible ,child:  Text(
+              'ቀኑ  ${date.toStringFormat('MMM dd yyyy')}  ነው',
               style: const TextStyle(fontSize: 20),
-            ),
+            ),),
             Padding(
               padding: const EdgeInsets.all(15.0),
               child: SizedBox(
@@ -96,11 +104,12 @@ class _MyHomePageState extends State<MyHomePage> {
                             month -= 1;
                           }
                           setState(() {
+                            isVisible =false;
                             date = EthiopianDate(1, month, year, '', 0);
                           });
                         }, child: const Icon(Icons.chevron_left)),
                         Text(
-                          '${date.month} ${date.year}',
+                          date.toStringFormat('MMM yyyy'),
                           style: const TextStyle(fontSize: 20),
                         ),
                         MaterialButton(onPressed: () {
@@ -113,6 +122,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             month += 1;
                           }
                           setState(() {
+                            isVisible =false;
                             date = EthiopianDate(1, month, year, '', 0);
                           });
                         }, child: const Icon(Icons.chevron_right)),
@@ -120,20 +130,14 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                     const SizedBox(height: 10),
                     Row(
-                      children: [
-                        Container(
-                          width: 50,
-
-                          height: 35,
-                          child: Center(
-                            child: Text(
-                             '',
-                              textAlign: TextAlign.center,
-
-                            ),
-
-                          ),
-                        )
+                      children: const [
+                      DayDisplay(text:'ሰ'),
+                      DayDisplay(text:'ማክ'),
+                      DayDisplay(text:'እሮ'),
+                      DayDisplay(text:'ሀሙ'),
+                      DayDisplay(text:'አር'),
+                      DayDisplay(text:'ቅ'),
+                      DayDisplay(text:'እሁ'),
                       ],
                     ),
                     const SizedBox(height: 10),
