@@ -89,61 +89,64 @@ class _MyHomePageState extends State<MyHomePage> {
                     .of(context)
                     .size
                     .height * .6,
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        MaterialButton(onPressed: () {
-                          int month = date.month;
-                          int year = date.year;
-                          if (date.month == 1) {
-                            month = 13;
-                            year -= 1;
-                          } else {
-                            month -= 1;
-                          }
-                          setState(() {
-                            isVisible =false;
-                            date = EthiopianDate(1, month, year, '', 0);
-                          });
-                        }, child: const Icon(Icons.chevron_left)),
-                        Text(
-                          date.toStringFormat('MMM yyyy'),
-                          style: const TextStyle(fontSize: 20),
-                        ),
-                        MaterialButton(onPressed: () {
-                          int month = date.month;
-                          int year = date.year;
-                          if (date.month == 13) {
-                            month = 1;
-                            year += 1;
-                          } else {
-                            month += 1;
-                          }
-                          setState(() {
-                            isVisible =false;
-                            date = EthiopianDate(1, month, year, '', 0);
-                          });
-                        }, child: const Icon(Icons.chevron_right)),
-                      ],
-                    ),
-                    const SizedBox(height: 10),
-                    Row(
-                      children: const [
-                      DayDisplay(text:'ሰ'),
-                      DayDisplay(text:'ማክ'),
-                      DayDisplay(text:'እሮ'),
-                      DayDisplay(text:'ሀሙ'),
-                      DayDisplay(text:'አር'),
-                      DayDisplay(text:'ቅ'),
-                      DayDisplay(text:'እሁ'),
-                      ],
-                    ),
-                    const SizedBox(height: 10),
-                    GenerateCalender(
-                        ethiopianDate: GetCalender.generateCalender(date))
-                  ],
+                child: GestureDetector(
+                  
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          MaterialButton(onPressed: () {
+                            int month = date.month;
+                            int year = date.year;
+                            if (date.month == 1) {
+                              month = 13;
+                              year -= 1;
+                            } else {
+                              month -= 1;
+                            }
+                            setState(() {
+                              isVisible =false;
+                              date = EthiopianDate(1, month, year, '', 0);
+                            });
+                          }, child: const Icon(Icons.chevron_left)),
+                          Text(
+                            date.toStringFormat('MMM yyyy'),
+                            style: const TextStyle(fontSize: 20),
+                          ),
+                          MaterialButton(onPressed: () {
+                            int month = date.month;
+                            int year = date.year;
+                            if (date.month == 13) {
+                              month = 1;
+                              year += 1;
+                            } else {
+                              month += 1;
+                            }
+                            setState(() {
+                              isVisible =false;
+                              date = EthiopianDate(1, month, year, '', 0);
+                            });
+                          }, child: const Icon(Icons.chevron_right)),
+                        ],
+                      ),
+                      const SizedBox(height: 10),
+                      Row(
+                        children: const [
+                        DayDisplay(text:'ሰ'),
+                        DayDisplay(text:'ማክ'),
+                        DayDisplay(text:'እሮ'),
+                        DayDisplay(text:'ሀሙ'),
+                        DayDisplay(text:'አር'),
+                        DayDisplay(text:'ቅ'),
+                        DayDisplay(text:'እሁ'),
+                        ],
+                      ),
+                      const SizedBox(height: 10),
+                      GenerateCalender(
+                          ethiopianDate: GetCalender.generateCalender(date))
+                    ],
+                  ),
                 ),
               ),
             )

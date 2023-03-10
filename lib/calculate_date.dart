@@ -115,7 +115,7 @@ class EthiopianDateConverter {
         date = datetime.day - 6;
       }
     } else if (DateTime.september == datetime.month) {
-      if (tempyear % 4 == 0) {
+      if ((tempyear-1) % 4 == 0) {
         if (datetime.day < 6) {
           month = 12;
           date = datetime.day + 31 - 6;

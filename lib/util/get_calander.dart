@@ -13,12 +13,12 @@ class GetCalender {
     var getTheFirstDayOftheMonth = getTheFirstDayOfTheMonth(
         date.month, date.year);
 
-    if (date.month == 12) {
-      getDay(13, date.year);
-    }
-    if (date.month == 1) {
-      getDay(13, date.year);
-    }
+   // if (date.month == 12) {
+    //   getDay(13, date.year);
+    // }
+    // if (date.month == 1) {
+    //   getDay(13, date.year);
+    // }
 
 
     for (int i = getTheFirstDayOftheMonth - 1; i > 0; i--) {
@@ -91,10 +91,11 @@ class GetCalender {
     return ethiopianMonths;
   }
 
+  // get how many days this month has
   static int getDay(month, year) {
     int day = 30;
     if (month == 13) {
-      if (year + 1 % 4 == 0) {
+      if (year %4 == 3) {
         day = 6;
       } else {
         day = 5;
@@ -103,8 +104,10 @@ class GetCalender {
     return day;
   }
 
+  // get how many days the last month has
   static int getPrevousMonthDay(month, year) {
     if (month == 1) {
+      year -=1;
       month = 13;
     }else{
       month -= 1;
@@ -112,15 +115,18 @@ class GetCalender {
     return getDay(month, year);
   }
 
+  //get how many days the next month has
   static int getNextMonthDay(month, year) {
     if (month == 13) {
       month = 1;
+      year +=1;
     }else{
       month += 1;
     }
     return getDay(month, year);
   }
 
+  //get when the day start
   static int getTheFirstDayOfTheMonth(int month, int year) {
     var ethiopianDate = EthiopianDate(1, month, year, '', 0);
     var gregorianDate = EthiopianToGregorian.calculateDate(ethiopianDate);
